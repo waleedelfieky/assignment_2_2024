@@ -80,16 +80,23 @@ int main(int argc, char **argv)
 
     while (ros::ok())
     {
-        std::cout << "Please enter command s: set c: cancel e: end" << std::endl;
+    	std::cout<<"============================================="<<std::endl;
+        std::cout<< "Please enter command"<<std::endl;
+        std::cout<<"s: set"<<std::endl;
+        std::cout<<"c: For Cancel"<<std::endl;
+        std::cout<<"e: For End" << std::endl;
         std::cin >> command;
+        
 
         if (command == 's')
         {
+            std::cout<<"============================================="<<std::endl;
             std::cout << "Enter x: ";
             std::cin >> x;
             std::cout << "Enter y: ";
             std::cin >> y;
-            std::cout << "Robot will go to x: " << x << " and y: " << y << std::endl;
+            std::cout << "Robot will go to x: " << x << " and y: " << y <<std::endl;
+            std::cout<<"============================================="<<std::endl;
             client.sendGoal(x, y);
         }
         else if (command == 'c')
