@@ -106,6 +106,7 @@ int main(int argc, char **argv)
         }
 
         ros::spinOnce(); // Process ROS callbacks without blocking
+        ros::Duration(0.1).sleep(); // Small sleep to allow console output to refresh properly
     }
 
     return 0;
