@@ -3,6 +3,7 @@
 #include <assignment_2_2024/PlanningAction.h>
 #include <nav_msgs/Odometry.h>
 #include <assignment_2_2024/RobotState.h>
+#include "iostream"
 
 typedef actionlib::SimpleActionClient<assignment_2_2024::PlanningAction> PlanningClient;
 
@@ -69,13 +70,40 @@ private:
     }
 };
 
+using namespace std;
+
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "robot_action_client");
     RobotActionClient client;
-
-    // Example: send a goal (1.0, 1.0)
-    client.sendGoal(20, 20);
+    
+    char command;
+    int x;
+    int y;
+    
+    while(true)
+    {
+    	cout<<"please enter command s: set c: cancell e:end"<<endl;
+    	cin>>command;
+    	if(command=='s'){
+    		cout<<"enter x: ";
+    		cin>>x;
+    		cout<<"enter y: ";
+    		cin>>y;
+    		cout<<"robot will go to x: "<<x<<" and y: "<<y<<endl;
+    		client.sendGoal(x,y);
+    	}
+    	else if(command=='c'){
+    		client.cancelGoal();
+    	}
+    	else if(command=='e'){
+    		break;
+    	}
+    	else{
+    		cout<<"you have entered invalid input"<<endl;
+    	}
+    		
+    }
 
     ros::spin();
     return 0;
