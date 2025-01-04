@@ -1,40 +1,43 @@
-#include <ros/ros.h>
-#include <assignment_2_2024/GetTarget.h>
+#include "ros/ros.h"
+#include "assignment_2_2024/GetTarget.h" // Include your custom service header
+#include "assignment_2_2024/PlanningActionGoal.h" // Include the message header for PlanningActionGoal
 
-class TargetService
-{
-public:
-    TargetService() : nh("~")
-    {
-        service = nh.advertiseService("get_target", &TargetService::handleGetTarget, this);
-    }
+// Variables to store the latest x and y values
+double target_x = 0.0;
+double target_y = 0.0;
 
-    bool handleGetTarget(assignment_2_2024::GetTarget::Request &req, assignment_2_2024::GetTarget::Response &res)
-    {
-        res.x = current_goal.first;
-        res.y = current_goal.second;
-        return true;
-    }
+// Callback for the topic subscriber
+void goalCallback(const assignment_2_2024::PlanningActionGoal::ConstPtr& msg) {
+    target_x = msg->goal.target_pose.pose.position.x;
+    target_y = msg->goal.target_pose.pose.position.y;
 
-    void setGoal(double x, double y)
-    {
-        current_goal = std::make_pair(x, y);
-    }
+    ROS_INFO("Updated target position: x = %f, y = %f", target_x, target_y);
+}
 
-private:
+// Service callback function
+bool getTargetPosition(assignment_2_2024::GetTarget::Request &req,
+                       assignment_2_2024::GetTarget::Response &res) {
+    res.x = target_x;
+    res.y = target_y;
+
+    ROS_INFO("Service called. Returning position: x = %f, y = %f", res.x, res.y);
+    return true;
+}
+
+int main(int argc, char **argv) {
+    // Initialize the ROS node
+    ros::init(argc, argv, "get_target_service_node");
     ros::NodeHandle nh;
-    ros::ServiceServer service;
-    std::pair<double, double> current_goal;
-};
 
-int main(int argc, char **argv)
-{
-    ros::init(argc, argv, "target_service");
-    TargetService service;
+    // Subscriber to the /reaching_goal/goal topic
+    ros::Subscriber goal_sub = nh.subscribe("/reaching_goal/goal", 10, goalCallback);
 
-    // Example to set a goal (1.0, 1.0)
-    service.setGoal(1.0, 1.0);
+    // Advertise the service
+    ros::ServiceServer service = nh.advertiseService("get_target", getTargetPosition);
 
+    ROS_INFO("Service node is ready to provide target position.");
     ros::spin();
+
     return 0;
 }
+
