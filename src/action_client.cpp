@@ -57,7 +57,7 @@ private:
 
     void feedbackCb(const assignment_2_2024::PlanningFeedbackConstPtr &feedback)
     {
-        ROS_INFO("Got Feedback");
+        //ROS_INFO("Got Feedback");
     }
 
     void odomCallback(const nav_msgs::Odometry::ConstPtr &msg)
