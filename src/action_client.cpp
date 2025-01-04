@@ -3,7 +3,7 @@
 #include <assignment_2_2024/PlanningAction.h>
 #include <nav_msgs/Odometry.h>
 #include <assignment_2_2024/RobotState.h>
-#include "iostream"
+#include <iostream>
 
 typedef actionlib::SimpleActionClient<assignment_2_2024::PlanningAction> PlanningClient;
 
@@ -57,7 +57,7 @@ private:
 
     void feedbackCb(const assignment_2_2024::PlanningFeedbackConstPtr &feedback)
     {
-        //ROS_INFO("Got Feedback");
+        // Placeholder for feedback processing if needed
     }
 
     void odomCallback(const nav_msgs::Odometry::ConstPtr &msg)
@@ -70,41 +70,44 @@ private:
     }
 };
 
-using namespace std;
-
 int main(int argc, char **argv)
 {
     ros::init(argc, argv, "robot_action_client");
     RobotActionClient client;
-    
+
     char command;
-    int x;
-    int y;
-    
-    while(true)
+    int x, y;
+
+    while (ros::ok())
     {
-    	cout<<"please enter command s: set c: cancell e:end"<<endl;
-    	cin>>command;
-    	if(command=='s'){
-    		cout<<"enter x: ";
-    		cin>>x;
-    		cout<<"enter y: ";
-    		cin>>y;
-    		cout<<"robot will go to x: "<<x<<" and y: "<<y<<endl;
-    		client.sendGoal(x,y);
-    	}
-    	else if(command=='c'){
-    		client.cancelGoal();
-    	}
-    	else if(command=='e'){
-    		break;
-    	}
-    	else{
-    		cout<<"you have entered invalid input"<<endl;
-    	}
-    		
+        std::cout << "Please enter command s: set c: cancel e: end" << std::endl;
+        std::cin >> command;
+
+        if (command == 's')
+        {
+            std::cout << "Enter x: ";
+            std::cin >> x;
+            std::cout << "Enter y: ";
+            std::cin >> y;
+            std::cout << "Robot will go to x: " << x << " and y: " << y << std::endl;
+            client.sendGoal(x, y);
+        }
+        else if (command == 'c')
+        {
+            client.cancelGoal();
+        }
+        else if (command == 'e')
+        {
+            break;
+        }
+        else
+        {
+            std::cout << "You have entered invalid input." << std::endl;
+        }
+
+        ros::spinOnce(); // Process ROS callbacks without blocking
     }
 
-    ros::spin();
     return 0;
 }
+
