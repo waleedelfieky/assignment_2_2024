@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   std_srvs
+  message_generation
   tf
 )
 
@@ -67,6 +68,16 @@ find_package(catkin REQUIRED COMPONENTS
 #   Service2.srv
 # )
 
+add_message_files(
+  FILES
+  RobotState.msg
+)
+
+add_service_files(
+  FILES
+  GetTarget.srv
+)
+
 ## Generate actions in the 'action' folder
  add_action_files(
    FILES
@@ -76,6 +87,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate added messages and services with any dependencies listed here
  generate_messages(
    DEPENDENCIES
+   std_msgs
    actionlib_msgs
    geometry_msgs
  )
@@ -110,6 +122,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
+  CATKIN_DEPENDS message_runtime
 #  INCLUDE_DIRS include
 #  LIBRARIES assignment_2_2023
 #  CATKIN_DEPENDS actionlib actionlib_msgs geometry_msgs nav_msgs roscpp rospy sensor_msgs std_msgs std_srvs tf
