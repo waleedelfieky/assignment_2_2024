@@ -1,15 +1,15 @@
 #include <ros/ros.h>
 #include <actionlib/client/simple_action_client.h>
-#include <move_base_msgs/MoveBaseAction.h>
+#include <assignment_2_2024/PlanningAction.h>
 #include <nav_msgs/Odometry.h>
 #include <assignment_2_2024/RobotState.h>
 
-typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
+typedef actionlib::SimpleActionClient<assignment_2_2024::PlanningAction> PlanningClient;
 
 class RobotActionClient
 {
 public:
-    RobotActionClient() : ac("move_base", true)
+    RobotActionClient() : ac("reaching_goal", true)
     {
         ac.waitForServer();
         pub = nh.advertise<assignment_2_2024::RobotState>("robot_state", 10);
@@ -18,7 +18,7 @@ public:
 
     void sendGoal(double x, double y)
     {
-        move_base_msgs::MoveBaseGoal goal;
+        assignment_2_2024::PlanningGoal goal;
         goal.target_pose.header.frame_id = "map";
         goal.target_pose.header.stamp = ros::Time::now();
         goal.target_pose.pose.position.x = x;
@@ -39,12 +39,12 @@ public:
 
 private:
     ros::NodeHandle nh;
-    MoveBaseClient ac;
+    PlanningClient ac;
     ros::Publisher pub;
     ros::Subscriber odom_sub;
     assignment_2_2024::RobotState robot_state;
 
-    void doneCb(const actionlib::SimpleClientGoalState &state, const move_base_msgs::MoveBaseResultConstPtr &result)
+    void doneCb(const actionlib::SimpleClientGoalState &state, const assignment_2_2024::PlanningResultConstPtr &result)
     {
         ROS_INFO("Goal finished with state: %s", state.toString().c_str());
     }
@@ -54,7 +54,7 @@ private:
         ROS_INFO("Goal just went active");
     }
 
-    void feedbackCb(const move_base_msgs::MoveBaseFeedbackConstPtr &feedback)
+    void feedbackCb(const assignment_2_2024::PlanningFeedbackConstPtr &feedback)
     {
         ROS_INFO("Got Feedback");
     }
@@ -75,7 +75,7 @@ int main(int argc, char **argv)
     RobotActionClient client;
 
     // Example: send a goal (1.0, 1.0)
-    client.sendGoal(1.0, 1.0);
+    client.sendGoal(20, 20);
 
     ros::spin();
     return 0;
