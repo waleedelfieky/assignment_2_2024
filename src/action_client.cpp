@@ -58,6 +58,8 @@ private:
     void feedbackCb(const assignment_2_2024::PlanningFeedbackConstPtr &feedback)
     {
         // Placeholder for feedback processing if needed
+        //ROS_INFO("Got Feedback");
+
     }
 
     void odomCallback(const nav_msgs::Odometry::ConstPtr &msg)
@@ -113,7 +115,7 @@ int main(int argc, char **argv)
         }
 
         ros::spinOnce(); // Process ROS callbacks without blocking
-        ros::Duration(0.1).sleep(); // Small sleep to allow console output to refresh properly
+        ros::Duration(1).sleep(); // Small sleep to allow console output to refresh properly
     }
 
     return 0;
