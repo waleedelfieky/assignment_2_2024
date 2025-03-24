@@ -1,0 +1,106 @@
+\hypertarget{action__client_8cpp}{}\doxysection{src/action\+\_\+client.cpp File Reference}
+\label{action__client_8cpp}\index{src/action\_client.cpp@{src/action\_client.cpp}}
+
+
+action client to control mobile robot movement  
+
+
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$assignment\+\_\+2\+\_\+2024/\+Planning\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$nav\+\_\+msgs/\+Odometry.\+h$>$}\newline
+{\ttfamily \#include $<$assignment\+\_\+2\+\_\+2024/\+Robot\+State.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+Include dependency graph for action\+\_\+client.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{action__client_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_robot_action_client}{Robot\+Action\+Client}}
+\begin{DoxyCompactList}\small\item\em A R\+OS action client that sends navigation goals to the robot and publishes its current state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef actionlib\+::\+Simple\+Action\+Client$<$ assignment\+\_\+2\+\_\+2024\+::\+Planning\+Action $>$ \mbox{\hyperlink{action__client_8cpp_a4f7bd8f2f9c6f2d89ba72027053fd733}{Planning\+Client}}
+\begin{DoxyCompactList}\small\item\em Typedef for a Simple\+Action\+Client using the Planning\+Action defined in the assignment\+\_\+2\+\_\+2024 package. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{action__client_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Main function that initializes the R\+OS node and handles user interaction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+action client to control mobile robot movement 
+
+\begin{DoxyAuthor}{Author}
+Elfieky Waleed 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+24/03/2025
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ /odom — receives the robot\textquotesingle{}s odometry data.
+
+Publishes to\+: ~\newline
+ /robot\+\_\+state — publishes current position and velocity of the robot.
+
+Action Clients\+: ~\newline
+ /reaching\+\_\+goal — sends position goals using the Planning\+Action interface.
+
+Description\+:
+
+A node that implements an action client, allowing the userto set a target (x, y) or to cancel it. Try to use the feedback/status of the action server to know when the target has been reached. The node also publishesthe robot position and velocity as a custom message (x,y, vel\+\_\+x, vel\+\_\+z), by relying on the values published on the topic /odom; 
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{action__client_8cpp_a4f7bd8f2f9c6f2d89ba72027053fd733}\label{action__client_8cpp_a4f7bd8f2f9c6f2d89ba72027053fd733}} 
+\index{action\_client.cpp@{action\_client.cpp}!PlanningClient@{PlanningClient}}
+\index{PlanningClient@{PlanningClient}!action\_client.cpp@{action\_client.cpp}}
+\doxysubsubsection{\texorpdfstring{PlanningClient}{PlanningClient}}
+{\footnotesize\ttfamily \mbox{\hyperlink{action__client_8cpp_a4f7bd8f2f9c6f2d89ba72027053fd733}{Planning\+Client}}}
+
+
+
+Typedef for a Simple\+Action\+Client using the Planning\+Action defined in the assignment\+\_\+2\+\_\+2024 package. 
+
+This action client is used to send goals to the \textquotesingle{}reaching\+\_\+goal\textquotesingle{} action server. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{action__client_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{action__client_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{action\_client.cpp@{action\_client.cpp}!main@{main}}
+\index{main@{main}!action\_client.cpp@{action\_client.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Main function that initializes the R\+OS node and handles user interaction. 
+
+Initializes the R\+OS node and an instance of \mbox{\hyperlink{class_robot_action_client}{Robot\+Action\+Client}}. It continuously prompts the user for commands to\+:
+\begin{DoxyItemize}
+\item Send a goal to the robot (command \textquotesingle{}s\textquotesingle{})
+\item Cancel the current goal (command \textquotesingle{}c\textquotesingle{})
+\item Exit the program (command \textquotesingle{}e\textquotesingle{})
+\end{DoxyItemize}
+
+The robot will navigate to the target (x, y) position if a goal is sent.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Argument count (unused). \\
+\hline
+{\em argv} & Argument vector (unused). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Exit status. 
+\end{DoxyReturn}

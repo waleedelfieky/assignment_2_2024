@@ -1,0 +1,72 @@
+\hypertarget{class_robot_action_client}{}\doxysection{Robot\+Action\+Client Class Reference}
+\label{class_robot_action_client}\index{RobotActionClient@{RobotActionClient}}
+
+
+A R\+OS action client that sends navigation goals to the robot and publishes its current state.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_robot_action_client_ae37a340cc7a2d6f06d45d3c81109efce}{Robot\+Action\+Client}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_robot_action_client_a2714d1a2f967a81e5eec2cfc17afd3d1}{send\+Goal}} (double x, double y)
+\begin{DoxyCompactList}\small\item\em Sends a goal to the action server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_robot_action_client_a5c326360ec223509c2b70b727f7e60dc}{cancel\+Goal}} ()
+\begin{DoxyCompactList}\small\item\em Cancels the current goal sent to the action server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A R\+OS action client that sends navigation goals to the robot and publishes its current state. 
+
+This class connects to the \textquotesingle{}reaching\+\_\+goal\textquotesingle{} action server, allows sending and canceling goals, listens to the robot\textquotesingle{}s odometry, and publishes the robot\textquotesingle{}s current state (position and velocity) on the \textquotesingle{}robot\+\_\+state\textquotesingle{} topic. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_robot_action_client_ae37a340cc7a2d6f06d45d3c81109efce}\label{class_robot_action_client_ae37a340cc7a2d6f06d45d3c81109efce}} 
+\index{RobotActionClient@{RobotActionClient}!RobotActionClient@{RobotActionClient}}
+\index{RobotActionClient@{RobotActionClient}!RobotActionClient@{RobotActionClient}}
+\doxysubsubsection{\texorpdfstring{RobotActionClient()}{RobotActionClient()}}
+{\footnotesize\ttfamily Robot\+Action\+Client\+::\+Robot\+Action\+Client (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor. 
+
+Initializes the action client, waits for the server, sets up the odometry subscriber and the robot\+\_\+state publisher. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_robot_action_client_a5c326360ec223509c2b70b727f7e60dc}\label{class_robot_action_client_a5c326360ec223509c2b70b727f7e60dc}} 
+\index{RobotActionClient@{RobotActionClient}!cancelGoal@{cancelGoal}}
+\index{cancelGoal@{cancelGoal}!RobotActionClient@{RobotActionClient}}
+\doxysubsubsection{\texorpdfstring{cancelGoal()}{cancelGoal()}}
+{\footnotesize\ttfamily void Robot\+Action\+Client\+::cancel\+Goal (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cancels the current goal sent to the action server. 
+
+the function take no argument and return void it only cancell the goal using the action client varibale that we defined before in the class \mbox{\Hypertarget{class_robot_action_client_a2714d1a2f967a81e5eec2cfc17afd3d1}\label{class_robot_action_client_a2714d1a2f967a81e5eec2cfc17afd3d1}} 
+\index{RobotActionClient@{RobotActionClient}!sendGoal@{sendGoal}}
+\index{sendGoal@{sendGoal}!RobotActionClient@{RobotActionClient}}
+\doxysubsubsection{\texorpdfstring{sendGoal()}{sendGoal()}}
+{\footnotesize\ttfamily void Robot\+Action\+Client\+::send\+Goal (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sends a goal to the action server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X-\/coordinate of the target position. \\
+\hline
+{\em y} & Y-\/coordinate of the target position.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+it return void
+\end{DoxyReturn}
+this function send a goal of x and y to the action server which then will move the mobile robot to this position with consideration of obsticales 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{action__client_8cpp}{action\+\_\+client.\+cpp}}\end{DoxyCompactItemize}

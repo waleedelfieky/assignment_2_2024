@@ -1,0 +1,137 @@
+\hypertarget{target__service_8cpp}{}\doxysection{src/target\+\_\+service.cpp File Reference}
+\label{target__service_8cpp}\index{src/target\_service.cpp@{src/target\_service.cpp}}
+
+
+Service node to provide target position of the robot.  
+
+
+{\ttfamily \#include \char`\"{}ros/ros.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}assignment\+\_\+2\+\_\+2024/\+Get\+Target.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}assignment\+\_\+2\+\_\+2024/\+Planning\+Action\+Goal.\+h\char`\"{}}\newline
+Include dependency graph for target\+\_\+service.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{target__service_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{target__service_8cpp_afb3c19da564a434913537db8aabb337e}{goal\+Callback}} (const assignment\+\_\+2\+\_\+2024\+::\+Planning\+Action\+Goal\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em Callback function for the goal topic subscriber. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{target__service_8cpp_ac7d19cf3d9aaf7842e84c3e8feeb2bf7}{get\+Target\+Position}} (assignment\+\_\+2\+\_\+2024\+::\+Get\+Target\+::\+Request \&req, assignment\+\_\+2\+\_\+2024\+::\+Get\+Target\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em Service callback to return the current target position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{target__service_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Main function to initialize the service node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{target__service_8cpp_a4c3eeef10b9d806d5891c86f24d50c49}{target\+\_\+x}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Stores the latest goal x-\/coordinate. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{target__service_8cpp_ab7b06714675673fbd3074de321e52bbe}\label{target__service_8cpp_ab7b06714675673fbd3074de321e52bbe}} 
+double \mbox{\hyperlink{target__service_8cpp_ab7b06714675673fbd3074de321e52bbe}{target\+\_\+y}} = 0.\+0
+\begin{DoxyCompactList}\small\item\em Stores the latest goal y-\/coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Service node to provide target position of the robot. 
+
+\begin{DoxyAuthor}{Author}
+Elfieky Waleed 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+24/03/2025
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ /reaching\+\_\+goal/goal — receives the goal target position for the robot. ~\newline
+
+
+Services\+: ~\newline
+ /get\+\_\+target — provides the latest target position (x, y) requested by the user. ~\newline
+
+
+Description\+:
+
+A service node that, when called, returns the coordinates of the last target sent by the user. It subscribes to the /reaching\+\_\+goal/goal topic to update the target coordinates and offers a service that allows clients to retrieve the latest target position. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{target__service_8cpp_ac7d19cf3d9aaf7842e84c3e8feeb2bf7}\label{target__service_8cpp_ac7d19cf3d9aaf7842e84c3e8feeb2bf7}} 
+\index{target\_service.cpp@{target\_service.cpp}!getTargetPosition@{getTargetPosition}}
+\index{getTargetPosition@{getTargetPosition}!target\_service.cpp@{target\_service.cpp}}
+\doxysubsubsection{\texorpdfstring{getTargetPosition()}{getTargetPosition()}}
+{\footnotesize\ttfamily bool get\+Target\+Position (\begin{DoxyParamCaption}\item[{assignment\+\_\+2\+\_\+2024\+::\+Get\+Target\+::\+Request \&}]{req,  }\item[{assignment\+\_\+2\+\_\+2024\+::\+Get\+Target\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+Service callback to return the current target position. 
+
+Responds to service requests by returning the latest known target x and y coordinates.
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & Incoming service request (unused). \\
+\hline
+{\em res} & Outgoing service response containing target x and y. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true Always returns true to indicate the service was handled. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{target__service_8cpp_afb3c19da564a434913537db8aabb337e}\label{target__service_8cpp_afb3c19da564a434913537db8aabb337e}} 
+\index{target\_service.cpp@{target\_service.cpp}!goalCallback@{goalCallback}}
+\index{goalCallback@{goalCallback}!target\_service.cpp@{target\_service.cpp}}
+\doxysubsubsection{\texorpdfstring{goalCallback()}{goalCallback()}}
+{\footnotesize\ttfamily void goal\+Callback (\begin{DoxyParamCaption}\item[{const assignment\+\_\+2\+\_\+2024\+::\+Planning\+Action\+Goal\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+Callback function for the goal topic subscriber. 
+
+Updates the global {\ttfamily target\+\_\+x} and {\ttfamily target\+\_\+y} variables whenever a new goal is published.
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Pointer to the received Planning\+Action\+Goal message. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{target__service_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{target__service_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{target\_service.cpp@{target\_service.cpp}!main@{main}}
+\index{main@{main}!target\_service.cpp@{target\_service.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Main function to initialize the service node. 
+
+Subscribes to the {\ttfamily /reaching\+\_\+goal/goal} topic to track the robot\textquotesingle{}s target position. Advertises a service called {\ttfamily /get\+\_\+target} to return the current target position.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Argument count. \\
+\hline
+{\em argv} & Argument vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int Exit code. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{target__service_8cpp_a4c3eeef10b9d806d5891c86f24d50c49}\label{target__service_8cpp_a4c3eeef10b9d806d5891c86f24d50c49}} 
+\index{target\_service.cpp@{target\_service.cpp}!target\_x@{target\_x}}
+\index{target\_x@{target\_x}!target\_service.cpp@{target\_service.cpp}}
+\doxysubsubsection{\texorpdfstring{target\_x}{target\_x}}
+{\footnotesize\ttfamily double target\+\_\+x = 0.\+0}
+
+
+
+Stores the latest goal x-\/coordinate. 
+
+$<$ Custom service header Message header for Planning\+Action\+Goal 

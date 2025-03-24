@@ -1,0 +1,124 @@
+\hypertarget{md__r_e_a_d_m_e_autotoc_md1}{}\doxysection{Table of Contents\+:}\label{md__r_e_a_d_m_e_autotoc_md1}
+
+\begin{DoxyItemize}
+\item \href{\#overview-of-system}{\texttt{ overview-\/of-\/system}}
+\item \href{\#Create_Custom_Message}{\texttt{ Create\+\_\+\+Custom\+\_\+\+Message}}
+\item \href{\#Create_Custom_Service}{\texttt{ Create\+\_\+\+Custom\+\_\+\+Service}}
+\item \href{\#Node_One_implementation}{\texttt{ Node\+\_\+\+One\+\_\+implementation}}
+\item \href{\#Node_Two_implementation}{\texttt{ Node\+\_\+\+Two\+\_\+implementation}}
+\item \href{\#video}{\texttt{ video}}
+\item \href{\#contact-information}{\texttt{ Contact Information}}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{overview-\/of-\/system\+:}\label{md__r_e_a_d_m_e_autotoc_md2}
+This project provides a R\+O\+S-\/based solution to improve robot navigation towards a target point. The system resolves the blocking behavior by implementing an action server, allowing the robot to continue functioning while moving towards the target.\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysubsection{Key Features\+:}\label{md__r_e_a_d_m_e_autotoc_md3}
+
+\begin{DoxyItemize}
+\item {\bfseries{Action Client Node}}\+: Allows the user to set or cancel a target (x, y) and uses feedback/status from the action server to track progress. It also publishes the robot\textquotesingle{}s position and velocity as a custom message ({\ttfamily x, y, vel\+\_\+x, vel\+\_\+z}) based on the {\ttfamily /odom} topic.
+\item {\bfseries{Service Node}}\+: A service that returns the coordinates of the last target sent by the user.
+\item {\bfseries{Launch File}}\+: A launch file to start the entire simulation setup, ensuring smooth execution of all components.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{Task Breakdown}\label{md__r_e_a_d_m_e_autotoc_md4}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Action Client Node}}\+: ~\newline
+
+\begin{DoxyItemize}
+\item Set or cancel a target (x, y) for the robot.
+\item Monitor the robot’s progress using feedback/status from the action server.
+\item Publish the robot’s position and velocity as a custom message ({\ttfamily x, y, vel\+\_\+x, vel\+\_\+z}).
+\end{DoxyItemize}
+\item {\bfseries{Service Node}}\+: ~\newline
+
+\begin{DoxyItemize}
+\item Return the coordinates of the last target set by the user.
+\end{DoxyItemize}
+\item {\bfseries{Launch File}}\+: ~\newline
+
+\begin{DoxyItemize}
+\item Launch the entire simulation and initialize all components.
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysection{Create\+\_\+\+Custom\+\_\+\+Message\+:}\label{md__r_e_a_d_m_e_autotoc_md5}
+in this stage we created a msg directory and define a custom message inside it the following content \hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysection{Create\+\_\+\+Custom\+\_\+\+Service\+:}\label{md__r_e_a_d_m_e_autotoc_md6}
+in this stage we created a srv directory and define a custom srv inside it the following content \hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysection{Node\+\_\+\+One\+:}\label{md__r_e_a_d_m_e_autotoc_md7}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{Robot Action Client}\label{md__r_e_a_d_m_e_autotoc_md8}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{Overview}\label{md__r_e_a_d_m_e_autotoc_md9}
+This R\+O\+S-\/based application implements an action client that sends goals to a robot to navigate to a target location. The client communicates with the action server to control the robot\textquotesingle{}s movement and monitors its state through feedback. It also publishes the robot\textquotesingle{}s position and velocity as custom messages.\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsubsection{Key Features\+:}\label{md__r_e_a_d_m_e_autotoc_md10}
+
+\begin{DoxyItemize}
+\item {\bfseries{Action Client}}\+: Sends navigation goals (x, y) to the robot.
+\item {\bfseries{Goal Control}}\+: Allows the user to set, cancel, or terminate navigation goals through command-\/line input.
+\item {\bfseries{Robot State Publishing}}\+: The robot\textquotesingle{}s position and velocity are published in the {\ttfamily Robot\+State} message format, based on {\ttfamily /odom} data.
+\item {\bfseries{Feedback and Status}}\+: Provides real-\/time feedback on the state of the goal (active, completed, or canceled).
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysubsubsection{Workflow\+:}\label{md__r_e_a_d_m_e_autotoc_md11}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Set Goal}}\+: The user enters a target (x, y) coordinate, and the robot navigates to that point.
+\item {\bfseries{Cancel Goal}}\+: The user can cancel an ongoing goal.
+\item {\bfseries{End Program}}\+: The user can terminate the program.
+\end{DoxyEnumerate}
+\begin{DoxyEnumerate}
+\item Follow the on-\/screen instructions for this node\+:
+\end{DoxyEnumerate}
+\begin{DoxyItemize}
+\item Press {\ttfamily s} to set a new target location.
+\item Press {\ttfamily c} to cancel the current goal.
+\item Press {\ttfamily e} to exit the program.
+\end{DoxyItemize}
+
+
+
+there is an error check here is the user entered invalid input as shown in the follwoing picture 
+
+after we enter the command the robot will move as stated in the video at the end
+
+also the updates is being publiched to the update state topic as showing in the following picture \hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysubsection{Node\+\_\+\+Two\+:}\label{md__r_e_a_d_m_e_autotoc_md12}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysubsection{Overview}\label{md__r_e_a_d_m_e_autotoc_md13}
+The {\ttfamily get\+\_\+target\+\_\+service\+\_\+node} is a R\+OS node designed to manage and provide the robot\textquotesingle{}s target position. It listens for target goal updates via a subscriber and offers a service to retrieve the current target coordinates.\hypertarget{md__r_e_a_d_m_e_autotoc_md14}{}\doxysubsection{Functionality}\label{md__r_e_a_d_m_e_autotoc_md14}
+This node has two main components\+:
+\begin{DoxyEnumerate}
+\item {\bfseries{Subscriber}}\+: It subscribes to the {\ttfamily /reaching\+\_\+goal/goal} topic and updates the target position whenever a new goal is received.
+\item {\bfseries{Service}}\+: It advertises a service called {\ttfamily \char`\"{}get\+\_\+target\char`\"{}}, which allows users to request the robot\textquotesingle{}s current target position.
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md15}{}\doxysubsubsection{Key Features\+:}\label{md__r_e_a_d_m_e_autotoc_md15}
+
+\begin{DoxyItemize}
+\item {\bfseries{Goal Update}}\+: The target position (x, y) is updated based on messages received on the {\ttfamily /reaching\+\_\+goal/goal} topic.
+\item {\bfseries{Service}}\+: The node provides a service to return the current target coordinates, which can be queried by other nodes or users.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md16}{}\doxysubsection{R\+O\+S Topics and Services}\label{md__r_e_a_d_m_e_autotoc_md16}
+
+\begin{DoxyItemize}
+\item {\bfseries{Subscribed Topic}}\+: {\ttfamily /reaching\+\_\+goal/goal}
+\begin{DoxyItemize}
+\item {\bfseries{Message Type}}\+: {\ttfamily assignment\+\_\+2\+\_\+2024/\+Planning\+Action\+Goal}
+\item {\bfseries{Purpose}}\+: Receives the target goal (x, y) coordinates.
+\end{DoxyItemize}
+\item {\bfseries{Advertised Service}}\+: {\ttfamily get\+\_\+target}
+\begin{DoxyItemize}
+\item {\bfseries{Service Type}}\+: {\ttfamily assignment\+\_\+2\+\_\+2024/\+Get\+Target}
+\item {\bfseries{Purpose}}\+: Returns the current target coordinates (x, y).
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md17}{}\doxysubsection{How It Works}\label{md__r_e_a_d_m_e_autotoc_md17}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Goal Subscription}}\+: When a new goal message is published to the {\ttfamily /reaching\+\_\+goal/goal} topic, the node\textquotesingle{}s {\ttfamily goal\+Callback} function is triggered, updating the robot\textquotesingle{}s target position (x, y).
+\item {\bfseries{Service}}\+: When the service {\ttfamily \char`\"{}get\+\_\+target\char`\"{}} is called, the node responds with the latest stored target coordinates.
+\end{DoxyEnumerate}
+
+the service call output is shown in following picture
+
+
+
+overall system in action would be observed in the attached video at the end\hypertarget{md__r_e_a_d_m_e_autotoc_md18}{}\doxysubsection{launch\+\_\+file}\label{md__r_e_a_d_m_e_autotoc_md18}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md19}{}\doxysection{Launch File R\+E\+A\+D\+ME}\label{md__r_e_a_d_m_e_autotoc_md19}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md20}{}\doxysubsection{Overview}\label{md__r_e_a_d_m_e_autotoc_md20}
+This launch file initializes several nodes and parameters for the {\ttfamily assignment\+\_\+2\+\_\+2024} package, including simulation setup, wall-\/following behavior, and navigation.\hypertarget{md__r_e_a_d_m_e_autotoc_md21}{}\doxysubsection{Modifications}\label{md__r_e_a_d_m_e_autotoc_md21}
+The following lines were added to the existing launch file\+:
+
+
+
+These additions integrate\+:
+
+
+\begin{DoxyItemize}
+\item robot\+\_\+action\+\_\+client\+: A node for sending goals to the robot.
+\item target\+\_\+service\+: A node that provides the target position as a R\+OS service.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md22}{}\doxysubsection{video for the final output\+:}\label{md__r_e_a_d_m_e_autotoc_md22}
+\href{https://github.com/user-attachments/assets/9b975f53-e362-4c72-9152-10f24c2b3669}{\texttt{ https\+://github.\+com/user-\/attachments/assets/9b975f53-\/e362-\/4c72-\/9152-\/10f24c2b3669}}\hypertarget{md__r_e_a_d_m_e_autotoc_md23}{}\doxysubsection{Contact Information\+:}\label{md__r_e_a_d_m_e_autotoc_md23}
+If you have any questions, suggestions, or feedback regarding these this project, please feel free to contact me at \href{mailto:waleedelfieky@gmail.com}{\texttt{ waleedelfieky@gmail.\+com}} 
