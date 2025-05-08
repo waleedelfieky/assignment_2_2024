@@ -29,7 +29,8 @@ To use the notebook:
 - ipywidgets
 
 
-## 📝 Notes
 
-- Ensure that the corresponding ROS1 action server is running before executing the action client cells in the notebook
+# results 
+
+![output](https://github.com/user-attachments/assets/e7e4e1cd-af89-46fe-9759-1d5992aec3f8)
 
